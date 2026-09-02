@@ -2,7 +2,7 @@
 
 A full-stack digital game marketplace built with Next.js, React, TypeScript, Drizzle ORM, and Turso/libSQL.
 
-PlayGame provides a complete marketplace workflow where users can discover games, manage their wallet, purchase games, and access purchased games through their library. Developers can manage games and track revenue, while administrators manage the platform and monitor platform revenue.
+PlayGame provides a complete marketplace experience where users can discover games, manage their wallet, purchase games, and access purchased games through their library. Developers can manage games and track revenue, while administrators manage the platform and monitor platform revenue.
 
 🌐 Live Demo
 
@@ -35,11 +35,11 @@ Production deployment with Vercel and Turso
 
 🏠 Marketplace
 
-Users can browse the game catalog, view game details, and discover available games.
+Users can browse the game catalog, discover available games, and view detailed information about each game.
 
 🔐 Authentication
 
-Provides user registration, login, and account management with role-based access.
+Provides user registration, login, account management, and role-based access control.
 
 🛒 Shopping
 
@@ -47,76 +47,45 @@ Users can add games to their cart and complete purchases through the checkout pr
 
 💰 Wallet
 
-Each user can manage their wallet balance, perform top-ups, and view transaction history.
+Users can manage their wallet balance, perform top-ups, and view their transaction history.
 
 📚 Library
 
-Purchased games are automatically added to the user's library and associated with their ownership record.
+After a successful purchase, the game is added to the user's library and associated with their ownership record.
 
 👨‍💻 Developer
 
-Developers have access to a dedicated dashboard where they can manage games and monitor generated revenue.
+Developers have access to a dedicated dashboard for managing games and monitoring their generated revenue.
 
 🛡️ Administration
 
-Administrators can manage the platform, manage games, and monitor platform revenue.
+Administrators can manage games, oversee the platform, and monitor platform revenue.
 
 ⏰ Game Lifecycle
 
-Games can use scheduled release dates. The release-processing system automatically handles games that reach their scheduled release time.
+Games can have scheduled release dates. The release-processing system handles games when their scheduled release time is reached.
 
 🔄 Application Workflow
 
-The main marketplace workflow starts when a user discovers a game and continues through purchase and ownership.
+The main marketplace workflow begins when a user discovers a game through the marketplace. The user can view the game details, add the game to their cart, and proceed to checkout.
 
-Browse Games
-     │
-     ▼
-Game Details
-     │
-     ▼
-Add to Cart
-     │
-     ▼
-Checkout
-     │
-     ▼
-Wallet Payment
-     │
-     ▼
-Purchase Completed
-     │
-     ├───────────────┐
-     │               │
-    90%             10%
-     │               │
-     ▼               ▼
-Developer         PlayGame
-Revenue           Platform Revenue
-     │               │
-     └───────┬───────┘
-             ▼
-       Game Library
+During checkout, the purchase is processed using the user's wallet balance. Once the transaction is completed successfully, the purchase and ownership records are created and the game becomes available in the user's library.
 
-After a successful purchase, the transaction is recorded and the purchased game becomes available in the user's library.
+The completed purchase also records the revenue distribution. 90% of the purchase amount is allocated to the developer, while 10% is allocated to PlayGame as platform revenue. Developer and platform revenue are tracked separately for reporting and dashboard purposes.
 
-Revenue Distribution
-
-For every completed purchase:
-
-90% → Developer revenue
-
-10% → PlayGame platform revenue
-
-This separation allows developer earnings and platform earnings to be tracked independently.
+This workflow connects the marketplace, cart, checkout, wallet, purchase, ownership, developer revenue, platform revenue, and library systems into one complete transaction process.
 
 🧩 Application Modules
 
-PlayGame is divided into several functional areas. The Marketplace handles game discovery and game details, while Authentication manages registration, login, and account access.
+PlayGame is organized into several functional areas.
 
-The Shopping module manages the cart and checkout process. The Wallet module handles balances, top-ups, and transaction history. After purchasing a game, users can access it through the Library.
+The Marketplace provides the game catalog, game details, and game discovery experience. Authentication manages registration, login, account management, and access control.
 
-Developers use the Developer Dashboard to manage their games and monitor revenue. Administrators use the Administration area to manage games and monitor platform revenue. The Game Lifecycle system handles scheduled game releases.
+The Shopping system handles the cart and checkout process, while the Wallet system manages balances, top-ups, and transactions. The Library provides users with access to their purchased games.
+
+The Developer area provides game management and revenue information for developers. The Administration area provides platform-level game management and revenue monitoring.
+
+The Game Lifecycle system manages scheduled releases and allows games to become available when their configured release date is reached.
 
 👥 User Roles
 
@@ -138,23 +107,9 @@ Manage games and monitor platform revenue
 
 ⏰ Game Lifecycle
 
-Games can have a scheduled release date. The release-processing system checks scheduled games and makes them available when their release date is reached.
+Games can be configured with a scheduled release date. Before release, the game remains unavailable for normal purchasing. When the scheduled release time is reached, the release-processing system updates the game's lifecycle state so that it becomes available to users.
 
-Scheduled Game
-      │
-      ▼
-Release Date Reached
-      │
-      ▼
-Release Processing
-      │
-      ▼
-Game Becomes Available
-      │
-      ▼
-Users Can Purchase
-
-This allows games to be prepared in advance while controlling when they become publicly available.
+This provides a controlled way to prepare games in advance while automatically managing their availability based on the configured release schedule.
 
 🛠️ Technology Stack
 
@@ -204,32 +159,15 @@ GitHub
 
 🏗️ Architecture
 
-PlayGame uses a full-stack Next.js architecture. The application layer handles authentication, marketplace features, shopping, wallet operations, library management, and role-specific dashboards. Drizzle ORM provides database access, while Turso/libSQL is used as the production database.
+PlayGame uses a full-stack Next.js architecture. The application layer handles the marketplace, authentication, shopping, wallet, library, developer dashboard, and administration features.
 
-User
- │
- ▼
-Next.js Application
- │
- ├── Authentication
- ├── Marketplace
- ├── Cart & Checkout
- ├── Wallet
- ├── Library
- ├── Developer Dashboard
- └── Admin Dashboard
- │
- ▼
-Drizzle ORM
- │
- ▼
-Turso / libSQL Database
+Drizzle ORM provides the database access layer, while Turso/libSQL is used as the production database. This architecture keeps the application logic and database operations organized while allowing the application to be deployed as a production web application through Vercel.
 
 📁 Project Organization
 
 The project is organized around Next.js application routes, reusable UI components, authentication, database access, and shared application logic. Marketplace, wallet, checkout, developer, administration, and authentication features are separated into their respective application areas, while shared components and backend/database functionality are maintained in dedicated directories.
 
-This structure keeps the application modular and makes it easier to maintain and extend individual features without tightly coupling the entire system.
+This organization keeps the application modular and makes individual features easier to maintain and extend.
 
 🗄️ Database
 
@@ -360,6 +298,8 @@ Automated testing and CI/CD
 🎯 Project Purpose
 
 PlayGame demonstrates how a modern full-stack application can combine authentication, database management, e-commerce logic, wallet transactions, role-based dashboards, revenue management, and scheduled processing into one complete marketplace system.
+
+The project is designed as a portfolio application to demonstrate practical full-stack development and the ability to build and deploy a multi-role web application with real business logic.
 
 🔗 Links
 
