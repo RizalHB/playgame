@@ -67,7 +67,7 @@ Games can use scheduled release dates. The release-processing system automatical
 
 🔄 Application Workflow
 
-The main marketplace workflow is:
+The main marketplace workflow starts when a user discovers a game and continues through purchase and ownership.
 
 Browse Games
      │
@@ -98,6 +98,8 @@ Revenue           Platform Revenue
              ▼
        Game Library
 
+After a successful purchase, the transaction is recorded and the purchased game becomes available in the user's library.
+
 Revenue Distribution
 
 For every completed purchase:
@@ -110,41 +112,11 @@ This separation allows developer earnings and platform earnings to be tracked in
 
 🧩 Application Modules
 
-PlayGame
-├── Marketplace
-│   ├── Game Catalog
-│   ├── Game Details
-│   └── Game Discovery
-│
-├── Authentication
-│   ├── Login
-│   ├── Registration
-│   └── Account Management
-│
-├── Shopping
-│   ├── Cart
-│   └── Checkout
-│
-├── Wallet
-│   ├── Balance
-│   ├── Top-Ups
-│   └── Transactions
-│
-├── Library
-│   └── Purchased Games
-│
-├── Developer
-│   ├── Dashboard
-│   ├── Game Management
-│   └── Revenue
-│
-├── Administration
-│   ├── Dashboard
-│   ├── Game Management
-│   └── Platform Revenue
-│
-└── Game Lifecycle
-    └── Scheduled Release Processing
+PlayGame is divided into several functional areas. The Marketplace handles game discovery and game details, while Authentication manages registration, login, and account access.
+
+The Shopping module manages the cart and checkout process. The Wallet module handles balances, top-ups, and transaction history. After purchasing a game, users can access it through the Library.
+
+Developers use the Developer Dashboard to manage their games and monitor revenue. Administrators use the Administration area to manage games and monitor platform revenue. The Game Lifecycle system handles scheduled game releases.
 
 👥 User Roles
 
@@ -166,7 +138,7 @@ Manage games and monitor platform revenue
 
 ⏰ Game Lifecycle
 
-Games can have a scheduled release date.
+Games can have a scheduled release date. The release-processing system checks scheduled games and makes them available when their release date is reached.
 
 Scheduled Game
       │
@@ -182,7 +154,7 @@ Game Becomes Available
       ▼
 Users Can Purchase
 
-This allows games to be prepared in advance and automatically become available when their release date is reached.
+This allows games to be prepared in advance while controlling when they become publicly available.
 
 🛠️ Technology Stack
 
@@ -232,6 +204,8 @@ GitHub
 
 🏗️ Architecture
 
+PlayGame uses a full-stack Next.js architecture. The application layer handles authentication, marketplace features, shopping, wallet operations, library management, and role-specific dashboards. Drizzle ORM provides database access, while Turso/libSQL is used as the production database.
+
 User
  │
  ▼
@@ -251,30 +225,11 @@ Drizzle ORM
  ▼
 Turso / libSQL Database
 
-📁 Project Structure
+📁 Project Organization
 
-playgame/
-├── app/
-│   ├── admin/
-│   ├── api/
-│   ├── cart/
-│   ├── checkout/
-│   ├── developer/
-│   ├── library/
-│   ├── login/
-│   ├── signup/
-│   └── wallet/
-│
-├── components/
-├── lib/
-│   ├── auth/
-│   ├── database/
-│   └── ...
-│
-├── public/
-├── drizzle.config.ts
-├── package.json
-└── README.md
+The project is organized around Next.js application routes, reusable UI components, authentication, database access, and shared application logic. Marketplace, wallet, checkout, developer, administration, and authentication features are separated into their respective application areas, while shared components and backend/database functionality are maintained in dedicated directories.
+
+This structure keeps the application modular and makes it easier to maintain and extend individual features without tightly coupling the entire system.
 
 🗄️ Database
 
@@ -321,7 +276,7 @@ Install dependencies:
 
 npm install
 
-Create your local environment file:
+Create a local .env file:
 
 DATABASE_URL=file:./playgame.db
 NEXT_PUBLIC_APP_URL=http://localhost:3000
@@ -331,7 +286,7 @@ Run the development server:
 
 npm run dev
 
-Open:
+Open the application at:
 
 http://localhost:3000
 
@@ -368,11 +323,11 @@ Sensitive credentials should be stored as environment variables and should never
 
 🔒 Security
 
-The project follows several basic security practices:
+The project follows several security practices:
 
-Passwords are stored using secure password hashing.
+Passwords are securely hashed.
 
-Authentication is required for protected features.
+Authentication protects private features.
 
 Role-based authorization separates Gamer, Developer, and Administrator access.
 
@@ -404,7 +359,7 @@ Automated testing and CI/CD
 
 🎯 Project Purpose
 
-PlayGame demonstrates how a modern full-stack application can combine authentication, database management, e-commerce logic, wallet transactions, role-based dashboards, revenue management, and scheduled processing into one production-ready project.
+PlayGame demonstrates how a modern full-stack application can combine authentication, database management, e-commerce logic, wallet transactions, role-based dashboards, revenue management, and scheduled processing into one complete marketplace system.
 
 🔗 Links
 
